@@ -1,2 +1,697 @@
-첼시 화이팅
-파머 화이팅
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PARK JANG WOO — Personal Website & Portfolio</title>
+  <meta name="description" content="박장우 개인 웹사이트: 사회복지학 전공 3학년, 취업 포트폴리오, AI스마트워크 데이터 분석 프로젝트, 라이프스타일">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neutral: {
+              950: '#09090b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen flex flex-col selection:bg-neutral-900 selection:text-white dark:selection:bg-white dark:selection:text-neutral-950">
+
+  <!-- =================================================================
+       공통 네비게이션 헤더 (Header)
+       ================================================================= -->
+  <header class="sticky top-0 z-40 bg-white/85 dark:bg-neutral-950/85 backdrop-blur-md border-b border-neutral-200/80 dark:border-neutral-800/80 transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- 브랜드 로고 / 워드마크 -->
+      <a href="#home" class="flex flex-col group">
+        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-neutral-950 dark:text-white group-hover:opacity-80 transition-opacity">
+          PARK JANG WOO
+        </span>
+        <span class="text-[10px] tracking-widest text-neutral-500 dark:text-neutral-400 font-mono -mt-1">
+          SOCIAL WELFARE & DATA
+        </span>
+      </a>
+
+      <!-- 데스크톱 네비게이션 메뉴 (7대 메뉴) -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs lg:text-sm font-medium">
+        <a href="#home" data-nav-target="home" class="px-3 py-1.5 transition-colors">HOME</a>
+        <a href="#about" data-nav-target="about" class="px-3 py-1.5 transition-colors">ABOUT ME</a>
+        <a href="#academic" data-nav-target="academic" class="px-3 py-1.5 transition-colors">ACADEMIC</a>
+        <a href="#career" data-nav-target="career" class="px-3 py-1.5 transition-colors">CAREER</a>
+        <a href="#interests" data-nav-target="interests" class="px-3 py-1.5 transition-colors">MY INTERESTS</a>
+        <a href="#growth" data-nav-target="growth" class="px-3 py-1.5 transition-colors">MY GROWTH</a>
+        <a href="#contact" data-nav-target="contact" class="px-3 py-1.5 transition-colors">CONTACT</a>
+      </nav>
+
+      <!-- 우측 컨트롤 (다크 모드 & 모바일 햄버거) -->
+      <div class="flex items-center space-x-2">
+        <button id="theme-toggle" type="button" aria-label="테마 전환" class="p-2 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+          <i data-lucide="sun" class="w-4 h-4 hidden dark:block text-neutral-200"></i>
+          <i data-lucide="moon" class="w-4 h-4 block dark:hidden text-neutral-700"></i>
+        </button>
+
+        <button id="mobile-menu-btn" type="button" aria-label="모바일 메뉴 열기" class="md:hidden p-2 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+          <i data-lucide="menu" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 모바일 네비게이션 서랍 (Drawer) -->
+  <div id="mobile-drawer-backdrop" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity"></div>
+  <aside id="mobile-drawer" class="fixed top-0 right-0 w-64 h-full bg-white dark:bg-neutral-900 border-l border-neutral-200 dark:border-neutral-800 z-50 p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-6">
+        <span class="font-bold text-sm tracking-tight">메뉴 바로가기</span>
+        <button id="close-mobile-menu" type="button" aria-label="메뉴 닫기" class="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-2 text-sm font-medium">
+        <a href="#home" data-nav-target="home" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">1. HOME</a>
+        <a href="#about" data-nav-target="about" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">2. ABOUT ME</a>
+        <a href="#academic" data-nav-target="academic" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">3. ACADEMIC</a>
+        <a href="#career" data-nav-target="career" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">4. CAREER</a>
+        <a href="#interests" data-nav-target="interests" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">5. MY INTERESTS</a>
+        <a href="#growth" data-nav-target="growth" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">6. MY GROWTH</a>
+        <a href="#contact" data-nav-target="contact" class="py-2 px-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">7. CONTACT</a>
+      </nav>
+    </div>
+    <div class="pt-4 border-t border-neutral-200 dark:border-neutral-800 text-xs text-neutral-500 flex items-center justify-between">
+      <span>다크 모드</span>
+      <button id="mobile-theme-toggle" type="button" class="p-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700">
+        <i data-lucide="sun-medium" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- =================================================================
+       메인 콘텐츠 컨테이너 (7개 뷰 섹션)
+       ================================================================= -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
+    <!-- -------------------------------------------------------------
+         1. HOME VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-home" class="view-section active space-y-12 sm:space-y-16">
+      
+      <!-- Hero 섹션 -->
+      <div class="p-8 sm:p-12 md:p-16 rounded-3xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-800/80 relative overflow-hidden">
+        <!-- 배경 추상 기하학 SVG -->
+        <svg class="absolute right-0 top-0 w-80 h-80 text-neutral-200/50 dark:text-neutral-800/40 pointer-events-none transform translate-x-16 -translate-y-16" viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 4" />
+          <rect x="30" y="30" width="140" height="140" stroke="currentColor" stroke-width="1" />
+          <line x1="20" y1="20" x2="180" y2="180" stroke="currentColor" stroke-width="1" />
+        </svg>
+
+        <div class="relative z-10 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-full text-xs font-mono text-neutral-600 dark:text-neutral-300 mb-6">
+            <span class="w-2 h-2 rounded-full bg-neutral-900 dark:bg-white animate-pulse"></span>
+            PORTFOLIO & PERSONAL ARCHIVE
+          </div>
+          
+          <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-neutral-950 dark:text-white mb-4">
+            PARK JANG WOO
+          </h1>
+
+          <p class="text-base sm:text-lg md:text-xl font-medium text-neutral-800 dark:text-neutral-200 leading-snug mb-2">
+            “사람을 이해하고, 세상을 배우며<br class="hidden sm:inline"> 어제보다 나은 나를 만들어 가는 사람.”
+          </p>
+          <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 font-mono mb-8">
+            A person who understands people, explores the world, and grows every day.
+          </p>
+
+          <!-- 퀵 프로필 뱃지 컨테이너 -->
+          <div id="home-quick-info" class="mb-8"></div>
+
+          <!-- 액션 버튼 -->
+          <div class="flex flex-wrap gap-3">
+            <a href="#about" class="px-5 py-2.5 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 text-xs sm:text-sm font-semibold rounded-xl transition-all shadow-sm flex items-center gap-2">
+              <span>ABOUT ME 보기</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+            <a href="#career" class="px-5 py-2.5 bg-white hover:bg-neutral-100 dark:bg-neutral-800 dark:hover:bg-neutral-700 border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 text-xs sm:text-sm font-medium rounded-xl transition-all">
+              CAREER 포트폴리오
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 탐색 메뉴 카드 그리드 (6개 세부 메뉴 바로가기) -->
+      <div>
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-xl sm:text-2xl font-bold tracking-tight">메뉴 둘러보기 (Explore)</h2>
+          <span class="text-xs text-neutral-400 font-mono">6 SECTIONS</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          
+          <a href="#about" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="user" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">ABOUT ME</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">INFJ 성향, 요리 및 순발력 장점, 새로운 시도를 향한 성장 지향성을 소개합니다.</p>
+          </a>
+
+          <a href="#academic" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">ACADEMIC</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">사회복지학 전공 학습과 AI스마트워크 쿠팡 배송기사 이탈 예측 데이터 분석 프로젝트를 다룹니다.</p>
+          </a>
+
+          <a href="#career" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="briefcase" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">CAREER</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">3대 진로 관심 분야와 행사 지원·환경정화·아동복지관 등 3대 봉사활동 포트폴리오를 제공합니다.</p>
+          </a>
+
+          <a href="#interests" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="heart" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">MY INTERESTS</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">첼시 FC, KIA 타이거즈, 드라마 「또 오해영」, 음악, 게임, 요리 취향을 공유합니다.</p>
+          </a>
+
+          <a href="#growth" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="trending-up" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">MY GROWTH</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">학업, 봉사, 진로 준비, 일상 속 작은 성취를 시간순 타임라인으로 기록합니다.</p>
+          </a>
+
+          <a href="#contact" class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl interactive-card group">
+            <div class="w-10 h-10 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4 text-neutral-900 dark:text-neutral-100 group-hover:scale-105 transition-transform">
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <h3 class="font-bold text-base text-neutral-900 dark:text-neutral-100 mb-1">CONTACT</h3>
+            <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">이메일 안내 및 피드백 메시지를 보낼 수 있는 소통 창구입니다.</p>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- 최근 성장 기록 프리뷰 -->
+      <div class="p-6 sm:p-8 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <i data-lucide="sparkles" class="w-5 h-5 text-neutral-700 dark:text-neutral-300"></i>
+            <h3 class="font-bold text-base sm:text-lg">최근 성장 하이라이트</h3>
+          </div>
+          <a href="#growth" class="text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:underline">
+            전체 타임라인 보기 &rarr;
+          </a>
+        </div>
+        <div id="home-growth-preview" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+      </div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         2. ABOUT ME VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-about" class="view-section space-y-10">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6">
+        <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">02. Introduction</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">ABOUT ME</h2>
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          다양한 면모를 지닌 사람(A Person with Many Sides), 박장우를 소개합니다.
+        </p>
+      </div>
+
+      <!-- 기본 소개 & INFJ 성향 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 p-6 sm:p-8 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+          <h3 class="font-bold text-lg mb-3">사람에 대한 깊은 이해와 성장 지향</h3>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+            사회복지학을 전공하며 사람의 존엄성과 삶의 질에 깊은 관심을 두고 있습니다. 차분하고 진중한 태도로 타인의 어려움을 경청하며, 
+            단순한 이론에 머무르지 않고 데이터와 실천을 통해 실질적인 변화를 만들어가고자 합니다.
+          </p>
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            자신의 부족한 점을 솔직하게 인정하고, 작은 도전부터 차근차근 시도하며 어제보다 조금씩 성장해 나가는 태도를 가장 소중히 여깁니다.
+          </p>
+        </div>
+
+        <div class="p-6 sm:p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-neutral-400">MBTI PROFILE</span>
+            <h4 class="text-2xl font-black mt-1 text-neutral-950 dark:text-white">INFJ</h4>
+            <span class="text-xs font-medium text-neutral-500 block mb-3">선의의 옹호자형</span>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">
+              깊은 공감 능력과 진정성을 바탕으로 타인과 신뢰 관계를 형성하며, 원칙과 따뜻함을 조화롭게 유지합니다.
+            </p>
+          </div>
+          <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800 text-[11px] text-neutral-400">
+            * 사용자가 직접 확인한 자기소개 요소
+          </div>
+        </div>
+      </div>
+
+      <!-- 강점 (Strengths) -->
+      <div>
+        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+          <span>핵심 강점 (Key Strengths)</span>
+        </h3>
+        <div id="about-strengths" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- 보완점과 성장 지향 (Growth Mindset) -->
+      <div>
+        <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+          <i data-lucide="compass" class="w-5 h-5"></i>
+          <span>성장 과제 및 지향점 (Growth Mindset)</span>
+        </h3>
+        <div id="about-challenges" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- 라이프스타일 펀 팩트 (Fun Facts) -->
+      <div class="p-6 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+        <h3 class="font-bold text-base mb-4 flex items-center gap-2">
+          <i data-lucide="smile" class="w-5 h-5"></i>
+          <span>가벼운 TMI & 취향 요약</span>
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+          <div class="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
+            <span class="text-neutral-400 block text-[11px]">축구 최애팀</span>
+            <span class="font-bold text-neutral-900 dark:text-neutral-100">첼시 FC (콜 파머)</span>
+          </div>
+          <div class="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
+            <span class="text-neutral-400 block text-[11px]">야구 최애팀</span>
+            <span class="font-bold text-neutral-900 dark:text-neutral-100">KIA 타이거즈 (김선빈)</span>
+          </div>
+          <div class="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
+            <span class="text-neutral-400 block text-[11px]">인생 드라마</span>
+            <span class="font-bold text-neutral-900 dark:text-neutral-100">tvN 「또 오해영」</span>
+          </div>
+          <div class="p-3 bg-neutral-50 dark:bg-neutral-800/50 rounded-xl">
+            <span class="text-neutral-400 block text-[11px]">자신 있는 요리</span>
+            <span class="font-bold text-neutral-900 dark:text-neutral-100">김치찌개 & 볶음밥</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         3. ACADEMIC VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-academic" class="view-section space-y-10">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6">
+        <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">03. Studies & Projects</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">ACADEMIC</h2>
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          사회복지학 전공 학습과 데이터 분석 융합 프로젝트 기록입니다.
+        </p>
+      </div>
+
+      <!-- 전공 개요 카드 -->
+      <div class="p-6 sm:p-8 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+        <span class="text-xs font-mono text-neutral-500">MAJOR OVERVIEW</span>
+        <h3 class="text-xl font-bold mt-1 mb-2">사회복지학과 3학년: 이론과 실천의 연결</h3>
+        <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+          사회복지는 모든 구성원의 존엄성과 행복을 옹호하는 실천 학문입니다. 3학년 과정에서는 사회복지 실천 기술과 사회보장 정책 체계를 깊이 있게 탐구하고 있으며, 
+          데이터 분석 기술을 결합하여 근거에 기반한 정책과 프로그램을 설계하는 융합적 시각을 확장하고 있습니다.
+        </p>
+      </div>
+
+      <!-- 주요 탐색 분야 -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">학업 탐색 영역</h3>
+        <div id="academic-fields" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- 핵심 대표 프로젝트: AI스마트워크 쿠팡 배송기사 이탈 분석 -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold flex items-center gap-2">
+            <i data-lucide="layers" class="w-5 h-5"></i>
+            <span>융합 대표 프로젝트 (Featured Project)</span>
+          </h3>
+          <span class="text-xs px-2.5 py-0.5 bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 rounded font-mono font-bold">
+            실무 데이터 분석
+          </span>
+        </div>
+
+        <div class="p-6 sm:p-8 bg-white dark:bg-neutral-900 border-2 border-neutral-900 dark:border-neutral-100 rounded-2xl shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h4 class="text-lg sm:text-xl font-bold text-neutral-950 dark:text-white">
+              AI스마트워크: 쿠팡 배송기사 이탈 예측 및 리텐션 정책 종합 분석
+            </h4>
+            <span class="text-xs font-mono text-neutral-500">Python · Logistic Regression · SHAP</span>
+          </div>
+
+          <p class="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
+            배송기사 3,000명 실무 데이터를 분석하여 <strong>'소득 인상론'을 기각(p=0.140)</strong>하고, 
+            <strong>근무시간 단축, 주당 휴무 보장, 1:1 관리자 면담</strong> 등 현장 근무환경이 이탈 방지의 핵심임을 통계적으로 실증했습니다.
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+            <div class="p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl text-center">
+              <span class="text-[11px] text-neutral-400 block">통합 패키지 효과</span>
+              <span class="text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100">-14.34%p</span>
+              <span class="text-[10px] text-neutral-500 block">이탈률 13.19%로 급감</span>
+            </div>
+            <div class="p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl text-center">
+              <span class="text-[11px] text-neutral-400 block">이탈 방어 인원</span>
+              <span class="text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100">430.3명</span>
+              <span class="text-[10px] text-neutral-500 block">숙련 배송 인력 보존</span>
+            </div>
+            <div class="p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl text-center">
+              <span class="text-[11px] text-neutral-400 block">상위 10% 순편익</span>
+              <span class="text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100">2억 942만 원</span>
+              <span class="text-[10px] text-neutral-500 block">ROI 218.1% 달성</span>
+            </div>
+            <div class="p-3 bg-neutral-50 dark:bg-neutral-800 rounded-xl text-center">
+              <span class="text-[11px] text-neutral-400 block">단일 정책 최고 효율</span>
+              <span class="text-base sm:text-lg font-bold text-neutral-900 dark:text-neutral-100">ROI 220.0%</span>
+              <span class="text-[10px] text-neutral-500 block">1:1 면담 2회 추가</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-neutral-100 dark:border-neutral-800">
+            <span class="text-xs text-neutral-500">
+              * 노동 복지와 데이터 과학을 융합한 실증 분석 산출물
+            </span>
+            <button onclick="openAiProjectModal()" class="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 text-xs font-semibold rounded-xl transition-colors flex items-center gap-1.5">
+              <span>상세 실증 리포트 열기</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 수강 교과목 및 학업 기록 테이블 -->
+      <div>
+        <h3 class="text-lg font-bold mb-3">전공 교과목 및 학습 기록</h3>
+        <div class="overflow-x-auto rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-neutral-50 dark:bg-neutral-800/80 border-b border-neutral-200 dark:border-neutral-700 text-[11px] font-mono text-neutral-500 uppercase">
+                <th class="py-3 px-4">학기</th>
+                <th class="py-3 px-4">교과목명</th>
+                <th class="py-3 px-4">구분</th>
+                <th class="py-3 px-4">핵심 학습 주제</th>
+                <th class="py-3 px-4">배운 점 및 인사이트</th>
+              </tr>
+            </thead>
+            <tbody id="academic-courses-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         4. CAREER VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-career" class="view-section space-y-10">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6">
+        <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">04. Portfolio & Career</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">CAREER</h2>
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          사회복지 실천을 향한 3대 진로 탐색과 검증된 봉사활동 포트폴리오입니다.
+        </p>
+      </div>
+
+      <!-- 3대 진로 탐색 영역 -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">희망 진로 관심 영역 (Career Exploration)</h3>
+        <div id="career-targets" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      </div>
+
+      <!-- 3대 봉사활동 포트폴리오 -->
+      <div>
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold flex items-center gap-2">
+            <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+            <span>봉사활동 포트폴리오 (Volunteer Portfolio)</span>
+          </h3>
+          <span class="text-xs text-neutral-400 font-mono">3 CORE EXPERIENCES</span>
+        </div>
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 mb-4">
+          『구축 계획서』 4.4절의 10대 포트폴리오 평가 템플릿(역할, 문제 해결, 배운 점, 전공 연계성)으로 구조화된 경험입니다.
+        </p>
+        <div id="career-volunteers" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+      </div>
+
+      <!-- 자격증 및 실습 로드맵 -->
+      <div class="p-6 sm:p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+        <h3 class="font-bold text-base sm:text-lg mb-6 flex items-center gap-2">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+          <span>실무 자격 및 현장실습 마일스톤</span>
+        </h3>
+        <div id="career-roadmap" class="max-w-2xl"></div>
+      </div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         5. MY INTERESTS VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-interests" class="view-section space-y-8">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6">
+        <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">05. Lifestyle & Hobbies</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">MY INTERESTS</h2>
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          축구, 야구, OTT, 음악, 게임, 요리 등 일상에 활력을 불어넣는 취향 아카이브입니다.
+        </p>
+      </div>
+
+      <!-- 필터 및 검색 컨트롤 -->
+      <div class="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
+        
+        <!-- 카테고리 필터 버튼 그룹 -->
+        <div class="flex flex-wrap gap-1.5 text-xs">
+          <button onclick="filterInterests('all')" data-interest-filter="all" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 transition-colors">전체</button>
+          <button onclick="filterInterests('football')" data-interest-filter="football" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">축구 (첼시)</button>
+          <button onclick="filterInterests('baseball')" data-interest-filter="baseball" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">야구 (KIA)</button>
+          <button onclick="filterInterests('media')" data-interest-filter="media" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">영상 (또 오해영)</button>
+          <button onclick="filterInterests('music')" data-interest-filter="music" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">음악</button>
+          <button onclick="filterInterests('games')" data-interest-filter="games" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">게임</button>
+          <button onclick="filterInterests('cooking')" data-interest-filter="cooking" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">요리</button>
+        </div>
+
+        <!-- 실시간 검색 입력창 -->
+        <div class="relative w-full sm:w-64">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-neutral-400"></i>
+          <input type="text" id="interest-search-input" placeholder="키워드 검색..." class="w-full pl-9 pr-3 py-1.5 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl text-xs focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors">
+        </div>
+
+      </div>
+
+      <!-- 취미 콘텐츠 카드 그리드 -->
+      <div id="interests-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         6. MY GROWTH VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-growth" class="view-section space-y-8">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <div>
+          <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">06. Growth Timeline</span>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">MY GROWTH</h2>
+          <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+            학업, 봉사, 진로, 일상 속 작은 도전과 성취의 타임라인입니다.
+          </p>
+        </div>
+        
+        <!-- 새 기록 등록 버튼 -->
+        <button onclick="openAddGrowthModal()" class="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 text-xs font-semibold rounded-xl transition-colors flex items-center gap-1.5 self-start sm:self-auto shadow-sm">
+          <i data-lucide="plus" class="w-4 h-4"></i>
+          <span>새 성장 기록 추가</span>
+        </button>
+      </div>
+
+      <!-- 카테고리 필터 -->
+      <div class="flex flex-wrap gap-1.5 text-xs">
+        <button onclick="filterGrowth('all')" data-growth-filter="all" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 transition-colors">전체</button>
+        <button onclick="filterGrowth('ACADEMIC')" data-growth-filter="ACADEMIC" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">학업 & 프로젝트</button>
+        <button onclick="filterGrowth('VOLUNTEER')" data-growth-filter="VOLUNTEER" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">봉사활동</button>
+        <button onclick="filterGrowth('CAREER')" data-growth-filter="CAREER" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">진로 탐색</button>
+        <button onclick="filterGrowth('CHALLENGE')" data-growth-filter="CHALLENGE" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">새로운 도전</button>
+        <button onclick="filterGrowth('DAILY')" data-growth-filter="DAILY" class="px-3 py-1.5 rounded-xl font-medium bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 transition-colors">일상의 성취</button>
+      </div>
+
+      <!-- 타임라인 컨테이너 -->
+      <div id="growth-timeline-container" class="max-w-3xl pt-2"></div>
+
+    </section>
+
+    <!-- -------------------------------------------------------------
+         7. CONTACT VIEW
+         ------------------------------------------------------------- -->
+    <section id="view-contact" class="view-section space-y-10">
+      
+      <!-- 페이지 헤더 -->
+      <div class="border-b border-neutral-200 dark:border-neutral-800 pb-6">
+        <span class="text-xs font-mono text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">07. Get In Touch</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">CONTACT</h2>
+        <p class="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+          박장우에게 전하고 싶은 메시지나 협업 제안을 보내주세요.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+        
+        <!-- 좌측: 연락처 안내 (계획서 원칙: 미확인 연락처는 플레이스홀더 처리) -->
+        <div class="md:col-span-2 space-y-6">
+          <div class="p-6 bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+            <h3 class="font-bold text-base mb-2">연락 정보 안내</h3>
+            <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
+              『박장우 개인 웹사이트 구축 계획서』 4.7절 및 8절의 개인정보 보호 원칙에 따라, 실제 개인 연락처는 추후 본인이 결정한 시점에 공개됩니다.
+            </p>
+            <div class="space-y-3 text-xs">
+              <div class="flex items-center gap-2.5 text-neutral-700 dark:text-neutral-300">
+                <i data-lucide="mail" class="w-4 h-4 text-neutral-400"></i>
+                <span class="font-mono">contact@parkjangwoo.kr (준비 중)</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-neutral-700 dark:text-neutral-300">
+                <i data-lucide="map-pin" class="w-4 h-4 text-neutral-400"></i>
+                <span>대한민국</span>
+              </div>
+              <div class="flex items-center gap-2.5 text-neutral-700 dark:text-neutral-300">
+                <i data-lucide="shield-check" class="w-4 h-4 text-neutral-400"></i>
+                <span>개인정보 최소 수집 원칙 준수</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 bg-neutral-100/60 dark:bg-neutral-800/40 rounded-xl text-xs text-neutral-500 dark:text-neutral-400">
+            <span class="font-semibold block text-neutral-700 dark:text-neutral-300 mb-1">문의 폼 운영 상태</span>
+            현재 문의 양식은 시스템 테스트 모드로 작동합니다. 작성하신 메시지는 브라우저에서 안전하게 시뮬레이션됩니다.
+          </div>
+        </div>
+
+        <!-- 우측: 문의 작성 폼 -->
+        <div class="md:col-span-3 p-6 sm:p-8 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
+          <form id="contact-form" class="space-y-4 text-xs sm:text-sm">
+            <div>
+              <label for="contact-name" class="block font-medium text-neutral-700 dark:text-neutral-300 mb-1">성함 / 닉네임 *</label>
+              <input type="text" id="contact-name" required placeholder="방문자님의 성함을 입력해 주세요" class="w-full p-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors text-xs">
+            </div>
+
+            <div>
+              <label for="contact-email" class="block font-medium text-neutral-700 dark:text-neutral-300 mb-1">이메일 주소 *</label>
+              <input type="email" id="contact-email" required placeholder="회신 받으실 이메일 주소를 입력해 주세요" class="w-full p-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors text-xs font-mono">
+            </div>
+
+            <div>
+              <label for="contact-message" class="block font-medium text-neutral-700 dark:text-neutral-300 mb-1">메시지 내용 *</label>
+              <textarea id="contact-message" rows="5" required placeholder="전하고 싶은 말씀이나 문의 사항을 입력해 주세요" class="w-full p-3 bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl focus:outline-none focus:border-neutral-900 dark:focus:border-white transition-colors text-xs leading-relaxed"></textarea>
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" class="w-full py-3 bg-neutral-900 hover:bg-neutral-800 dark:bg-white dark:hover:bg-neutral-200 text-white dark:text-neutral-950 font-semibold rounded-xl transition-colors flex items-center justify-center gap-2 text-xs sm:text-sm shadow-sm">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>메시지 전송 (테스트 모드)</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =================================================================
+       공통 푸터 (Footer)
+       ================================================================= -->
+  <footer class="border-t border-neutral-200 dark:border-neutral-800 py-10 bg-neutral-50 dark:bg-neutral-900/50 mt-16 transition-colors">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-neutral-500 dark:text-neutral-400">
+      
+      <div class="flex flex-col items-center md:items-start">
+        <span class="font-bold text-neutral-900 dark:text-neutral-100 tracking-tight text-sm">PARK JANG WOO</span>
+        <span class="text-[11px] mt-0.5">사람을 이해하고, 세상을 배우며 어제보다 나은 나를 만들어 가는 사람.</span>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 text-xs font-medium">
+        <a href="#home" class="hover:underline">HOME</a>
+        <a href="#about" class="hover:underline">ABOUT ME</a>
+        <a href="#academic" class="hover:underline">ACADEMIC</a>
+        <a href="#career" class="hover:underline">CAREER</a>
+        <a href="#interests" class="hover:underline">MY INTERESTS</a>
+        <a href="#growth" class="hover:underline">MY GROWTH</a>
+        <a href="#contact" class="hover:underline">CONTACT</a>
+      </div>
+
+      <div class="text-[11px] font-mono text-center md:text-right">
+        &copy; 2026 PARK JANG WOO. All rights reserved.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- =================================================================
+       공통 범용 모달 (Generic Modal)
+       ================================================================= -->
+  <div id="generic-modal" class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="modal-panel bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 w-full max-w-xl max-h-[85vh] rounded-3xl p-6 sm:p-8 flex flex-col justify-between shadow-2xl overflow-hidden">
+      
+      <!-- 모달 헤더 -->
+      <div class="flex items-center justify-between pb-4 border-b border-neutral-200 dark:border-neutral-800 mb-4">
+        <h3 id="modal-title" class="font-bold text-base sm:text-lg text-neutral-950 dark:text-white truncate pr-2"></h3>
+        <button id="modal-close-btn" type="button" aria-label="모달 닫기" class="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- 모달 본문 (스크롤) -->
+      <div id="modal-body" class="overflow-y-auto pr-1 flex-grow mb-4"></div>
+
+      <!-- 모달 푸터 -->
+      <div class="pt-3 border-t border-neutral-100 dark:border-neutral-800 flex justify-end">
+        <button onclick="closeGenericModal()" type="button" class="px-4 py-2 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-xl text-xs font-medium transition-colors">
+          닫기
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 상단 이동 플로팅 버튼 (Back to Top) -->
+  <button id="back-to-top" type="button" aria-label="상단으로 이동" class="fixed bottom-6 right-6 p-3 bg-neutral-900 text-white dark:bg-white dark:text-neutral-950 rounded-full shadow-lg border border-neutral-700 opacity-0 pointer-events-none transition-all duration-300 z-40 hover:scale-110">
+    <i data-lucide="arrow-up" class="w-4 h-4"></i>
+  </button>
+
+  <!-- 데이터 및 앱 스크립트 로드 -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
+
